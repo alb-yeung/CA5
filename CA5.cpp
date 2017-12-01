@@ -19,16 +19,16 @@ int main(int argc, char* argv[]){
 	string tag;
 
 	while(!infile.eof()){
-		cin >> tag;
+		infile >> tag;
 		if(tag == "TOTAL"){
 			int t;
-			cin >> t;
+			infile >> t;
 			requirements.total(t);
 		}
 		if(tag == "CREDIT"){
 			char type;
 			int num;
-			cin >> type >> num;
+			infile >> type >> num;
 			requirements.credit(type, num);
 		}
 		if(tag == "COURSE"){
@@ -37,20 +37,21 @@ int main(int argc, char* argv[]){
 			string next;
 			vector<string> prereqs;
 
-			cin >> name >> type >> next;
-			
+			infile >> name >> type >> next;
+/*			
 			while(next != "TOTAL" || next != "CREDIT" || next != "COURSE" || next != "CHOOSE"){
 				prereqs.push_back(next);
 				//next = infile.peek();
-				cin >> next;
+				infile >> next;
 				cout << next << endl;
 			}
-
+*/
 			requirements.course(name, type, prereqs);
 		}
 		if(tag == "CHOOSE"){
 			requirements.choose();
 		}
+		
 	}
 	
 	infile.close();
