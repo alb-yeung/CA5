@@ -1,4 +1,13 @@
-all:	Tester
+all:	Tester driver
+
+driver:	CA5.o requirements.o
+	g++ CA5.o requirements.o -o driver
+
+CA5.o:	CA5.cpp
+	g++ -c CA5.cpp
+
+requirements.o:	requirements.cpp
+	g++ -c requirements.cpp
 
 Tester:	Tester.o CourseMap.o Course.o
 	g++ Tester.o CourseMap.o Course.o -o Tester
@@ -13,4 +22,4 @@ Course.o:	Course.cpp Course.h
 	g++ -c Course.cpp Course.h
 
 clean:
-	rm -f *o Tester
+	rm -f *o Tester driver
