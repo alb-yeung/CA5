@@ -16,7 +16,7 @@ requirements::requirements(){
 
 void requirements::total(int t){
 	totalcredits = t;
-	cout << totalcredits << endl;
+	//cout << totalcredits << endl;
 }
 
 void requirements::credit(char type, int num){
@@ -29,16 +29,27 @@ void requirements::credit(char type, int num){
 	if(type == 'F'){
 		typeFcredits = num;
 	}
-	cout << typeCcredits << " " << typeHcredits << " " << typeFcredits << endl;
+	//cout << typeCcredits << " " << typeHcredits << " " << typeFcredits << endl;
 }
 
 void requirements::course(string name, char type, vector<string> prereqs){
-	cout << name << " " << type << " " << endl;
+
+/*
+	cout << name << " " << type << " ";
 	for(int i = 0; i < prereqs.size(); i++){
 		cout << prereqs[i];
 	}
+	cout << "\n";
+*/
 }
 
-void requirements::choose(){
+void requirements::choose(int num, vector<string> choosefromlist){
 
+/*
+	cout << num << " ";
+	for(int i = 0; i < choosefromlist.size(); i++){
+		cout << choosefromlist[i] << " ";
+	}
+	cout << "\n";
+*/
 }

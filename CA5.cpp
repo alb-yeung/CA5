@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <fstream>
 #include <vector>
+#include <sstream>
 #include "requirements.h"
 
 using namespace std;
@@ -34,25 +35,38 @@ int main(int argc, char* argv[]){
 		if(tag == "COURSE"){
 			string name;
 			char type;
-			string next;
+			string line;
 			vector<string> prereqs;
 
-			infile >> name >> type >> next;
-/*			
-			while(next != "TOTAL" || next != "CREDIT" || next != "COURSE" || next != "CHOOSE"){
-				prereqs.push_back(next);
-				//next = infile.peek();
-				infile >> next;
-				cout << next << endl;
+			infile >> name >> type;
+
+			// separate out the strings within the line
+			getline(infile, line);
+			istringstream ss(line);
+			for(string part; ss >> part;){
+				prereqs.push_back(part);
 			}
-*/
+
 			requirements.course(name, type, prereqs);
 		}
 		if(tag == "CHOOSE"){
-			requirements.choose();
+			int num;
+			string line;
+			vector<string> choosefromlist;
+
+			infile >> num;
+			
+			getline(infile, line);
+			istringstream ss(line);
+			for(string part; ss >> part;){
+				choosefromlist.push_back(part);
+			}
+
+			requirements.choose(num, choosefromlist);
 		}
 		
 	}
 	
 	infile.close();
 }
+
