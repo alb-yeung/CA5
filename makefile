@@ -9,11 +9,14 @@ CA5.o:	CA5.cpp
 requirements.o:	requirements.cpp
 	g++ -c requirements.cpp
 
-Tester:	Tester.o CourseMap.o Course.o
-	g++ Tester.o CourseMap.o Course.o -o Tester
+Tester:	Tester.o CourseMap.o Course.o Student.o
+	g++ Tester.o CourseMap.o Course.o Student.o -o Tester
 
 Tester.o:	Tester.cpp CourseMap.h Course.h
 	g++ -c Tester.cpp CourseMap.h Course.h
+
+Student.o:	Student.cpp Student.h CourseMap.h Course.h
+	g++ -c Student.cpp Student.h CourseMap.h Course.h
 
 CourseMap.o:	CourseMap.cpp CourseMap.h Course.h
 	g++ -c CourseMap.cpp CourseMap.h Course.h
