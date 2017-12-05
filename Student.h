@@ -25,7 +25,7 @@ class Student{
     Returns 1 if prereqs are not fulfilled
     Returns 2 if not offered at that time
    */
-  int checkClass(string courseName, int time);
+  int* checkClass(string courseName, int time);
   /*
     Input is file name
     Checks line by line so on

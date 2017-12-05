@@ -31,7 +31,7 @@ Student::Student(requirements r, CourseMap c){
   Returns 1 if prereqs are not fulfilled
   Returns 2 if not offered at that time
 */
-int Student::checkClass(string courseName, int time){
+int* Student::checkClass(string courseName, int time){
   /*
     If not offered at time return 2
     Search up graph location in courseMap
@@ -40,9 +40,18 @@ int Student::checkClass(string courseName, int time){
 	        ->if not return 1
     else return 0
    */
-  if (time != (table[courseName]).offered && (table[courseName]).offered != 2) return 2;
+  //{if possible message, total credits, totalC, totalH, totalF}
+  int* retData = new int[5];
   
-  return 0;
+  if (time != (table[courseName]).offered && (table[courseName]).offered != 2) retData[0] = 2;
+  else retData[0] = 0;
+
+  retData[1] = (table[courseName]).credits;
+  if ((table[courseName]).tags.find('C') != -1) retData[2] = retData[1];
+  if ((table[courseName]).tags.find('H') != -1) retData[3] = retData[1];
+  if ((table[courseName]).tags.find('F') != -1) retData[4] = retData[1];
+
+  return retData;
 }
 
 vector<string> Student::reorderSchedule(string inputFile){
@@ -90,7 +99,7 @@ void Student::calculateSchedule(string inputFile){
   string data;
   stringstream stream;
   int semester; // 0 if spring 1 if fall
-  int temp;
+  int* temp;
   /*
     for each line store time and add to Student's taken table
     go through each course one by one and checkClass on every one
@@ -106,32 +115,52 @@ void Student::calculateSchedule(string inputFile){
 
     getline(stream, data, ' ');
     temp = checkClass(data, semester);
-    if (temp){
-      if (temp == 1) errorMessage += "Not all of the prereqs for " + data + " are completed.\n";
-      if (temp == 2) errorMessage += data + " is not offered at that time.\n";
+    totalCredits += temp[1];
+    totalC += temp[2];
+    totalH += temp[3];
+    totalF += temp[4];
+    if (temp[0]){
+      if (temp[0] == 1) errorMessage += "Not all of the prereqs for " + data + " are completed.\n";
+      if (temp[0] == 2) errorMessage += data + " is not offered at that time.\n";
     }
 
     getline(stream, data, ' ');
     temp = checkClass(data, semester);
-    if (temp){
-      if (temp == 1) errorMessage += "Not all of the prereqs for " + data + " are completed.\n";
-      if (temp == 2) errorMessage += data + " is not offered at that time.\n";
+    totalCredits += temp[1];
+    totalC += temp[2];
+    totalH += temp[3];
+    totalF += temp[4];
+    if (temp[0]){
+      if (temp[0] == 1) errorMessage += "Not all of the prereqs for " + data + " are completed.\n";
+      if (temp[0] == 2) errorMessage += data + " is not offered at that time.\n";
     }
 
     getline(stream, data, ' ');
     temp = checkClass(data, semester);
-    if (temp){
-      if (temp == 1) errorMessage += "Not all of the prereqs for " + data + " are completed.\n";
-      if (temp == 2) errorMessage += data + " is not offered at that time.\n";
+    totalCredits += temp[1];
+    totalC += temp[2];
+    totalH += temp[3];
+    totalF += temp[4];
+    if (temp[0]){
+      if (temp[0] == 1) errorMessage += "Not all of the prereqs for " + data + " are completed.\n";
+      if (temp[0] == 2) errorMessage += data + " is not offered at that time.\n";
     }
 
     getline(stream, data, ' ');
     temp = checkClass(data, semester);
-    if (temp){
-      if (temp == 1) errorMessage += "Not all of the prereqs for " + data + " are completed.\n";
-      if (temp == 2) errorMessage += data + " is not offered at that time.\n";
+    totalCredits += temp[1];
+    totalC += temp[2];
+    totalH += temp[3];
+    totalF += temp[4];
+    if (temp[0]){
+      if (temp[0] == 1) errorMessage += "Not all of the prereqs for " + data + " are completed.\n";
+      if (temp[0] == 2) errorMessage += data + " is not offered at that time.\n";
     }
   }
+
+  /* if everything meets requirements change errorMessage */
+
+  if (errorMessage == "Bad plan. Here's why:\n") errorMessage = "Good plan. Get to work!";
   
   cout << errorMessage << endl;
 }
