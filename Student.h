@@ -1,5 +1,6 @@
 #include "CourseMap.h"
 #include "requirements.h"
+#include <vector>
 
 using namespace std;
 
@@ -31,5 +32,6 @@ class Student{
     Prints out errorMessage at the end of the function
    */
   void calculateSchedule(string inputFile);
-
+  vector<string> reorderSchedule(string inputFile);
+  
 };
