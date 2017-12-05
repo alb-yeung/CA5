@@ -9,13 +9,12 @@ Student::Student(){
   totalH = 0;
   totalF = 0;
   errorMessage = "Bad plan. Here's why:\n";
-  /*
   table = CourseMap();
   prereqsGraph = requirements();
-  */
+  
 }
-/*
-Student::Student(requirements r, courseMap c){
+
+Student::Student(requirements r, CourseMap c){
   taken = classTable();
   prereqsGraph = r;
   table = c;
@@ -24,7 +23,7 @@ Student::Student(requirements r, courseMap c){
   totalH = 0;
   totalF = 0;
   errorMessage = "Bad plan. Here's why:\n";
-  }*/
+}
 
 /*
   time is 0 if spring, 1 if fall

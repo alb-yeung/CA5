@@ -8,10 +8,13 @@ using namespace std;
 typedef unordered_map<string, Course> courseTable;
 
 class CourseMap{
- public:  
-  courseTable table; 
+ private:
+  courseTable table;
+ public:
   CourseMap();
   CourseMap(string input);
   void load(string input);
   void read();
+  Course & operator[] (string key);
+  
 };

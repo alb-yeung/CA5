@@ -59,3 +59,7 @@ CourseMap::CourseMap(string input){
   table = courseTable();
   load(input);
 }
+
+Course & CourseMap::operator[] (string key){
+  return table[key];
+}
