@@ -41,6 +41,8 @@ int Student::checkClass(string courseName, int time){
 	        ->if not return 1
     else return 0
    */
+  if (time != (table[courseName]).offered) return 2;
+  
   return 0;
 }
 
@@ -70,12 +72,8 @@ void Student::calculateSchedule(string inputFile){
     getline(stream, data, ' ');
     temp = checkClass(data, semester);
     if (temp){
-      if (temp == 1){
-	errorMessage += "Not all of the prereqs for " + data + " are completed.\n";
-      }
-      if (temp == 2){
-	errorMessage += data + " is not offered at that time.";
-      }
+      if (temp == 1) errorMessage += "Not all of the prereqs for " + data + " are completed.\n";
+      if (temp == 2) errorMessage += data + " is not offered at that time.";
     }
 
     getline(stream, data, ' ');

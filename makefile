@@ -25,4 +25,4 @@ Course.o:	Course.cpp Course.h
 	g++ -c Course.cpp Course.h
 
 clean:
-	rm -f *o Tester driver
+	rm -f *o *.gch Tester driver
