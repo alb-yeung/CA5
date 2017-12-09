@@ -18,7 +18,6 @@ void CourseMap::load(string input){
   string cn, tags;
   int credits, offered;
   stringstream stream;
-  int classes = 0;
   
   //initialize data to first line -> runs until data is empty
   for (getline(f, data, '\n'); data != ""; getline(f, data, '\n')){
@@ -42,10 +41,7 @@ void CourseMap::load(string input){
     temp.tags = tags;
 
     table[cn] = temp;
-    
-    classes++;
   }
-  cout << "Successfully loaded in " << classes << " classes!" << endl;
 }
 
 void CourseMap::read(){

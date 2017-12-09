@@ -1,5 +1,6 @@
 #include "CourseMap.h"
-#include "requirements.h"
+//#include "requirements.h"
+#include "Reqs.h"
 #include <vector>
 
 using namespace std;
@@ -9,7 +10,8 @@ typedef unordered_map<string, int> classTable;
 class Student{
  private:
   classTable taken; //hashtable for quick searches for classes already taken
-  requirements prereqsGraph;
+  Reqs* prereqsGraph;
+  //requirements r;
   CourseMap table;
   int totalCredits;
   int totalC, totalH, totalF;
@@ -17,7 +19,7 @@ class Student{
  public:
   string errorMessage;
   Student();
-  Student(requirements r, CourseMap c);
+  Student(Reqs* r, CourseMap c);
   /*
     Input is course name (CS101)
     Returns whether or not all the prereqs to that course have been fulfilled

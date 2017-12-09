@@ -4,20 +4,33 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
-#include "requirements.h"
+#include "Student.h"
 
 using namespace std;
 
 int main(int argc, char* argv[]){
 
+	CourseMap map = CourseMap();
+  	map.load(argv[2]);
+ 	Reqs* r = new Reqs();
+  	r->load(argv[1]);
+  	Student s = Student(r, map);
+  	s.calculateSchedule(argv[3]);
+
+  	cout << "Prerequisites don't quite work but everything else (I think) works" << endl;
+
+  	return 0;
+
 	//argv[1] is the requirement file
-	requirements requirements;
+	//requirements requirements;
 	//CourseMap map;
 	//Student s = Student(requirements, map);
 	
 	/* It'll probably be cleaner if this read in function is in the requirements file so that the main function can just have simple function calls and variable declarations */
 	
 	//open file in read mode
+
+	/*
 	ifstream infile;
 	infile.open(argv[1]);
 
@@ -72,5 +85,6 @@ int main(int argc, char* argv[]){
 	}
 	
 	infile.close();
+	*/
 }
 

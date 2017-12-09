@@ -10,11 +10,11 @@ Student::Student(){
   totalF = 0;
   errorMessage = "Bad plan. Here's why:\n";
   table = CourseMap();
-  prereqsGraph = requirements();
+  prereqsGraph = new Reqs();
   
 }
 
-Student::Student(requirements r, CourseMap c){
+Student::Student(Reqs* r, CourseMap c){
   taken = classTable();
   prereqsGraph = r;
   table = c;
@@ -43,13 +43,34 @@ int* Student::checkClass(string courseName, int time){
   //{if possible message, total credits, totalC, totalH, totalF}
   int* retData = new int[5];
   
+  taken[courseName] = 1;
+
+  retData[0] = 0;
+  retData[1] = 0;
+  retData[2] = 0;
+  retData[3] = 0;
+  retData[4] = 0;
   if (time != (table[courseName]).offered && (table[courseName]).offered != 2) retData[0] = 2;
-  else retData[0] = 0;
 
   retData[1] = (table[courseName]).credits;
   if ((table[courseName]).tags.find('C') != -1) retData[2] = retData[1];
   if ((table[courseName]).tags.find('H') != -1) retData[3] = retData[1];
   if ((table[courseName]).tags.find('F') != -1) retData[4] = retData[1];
+
+  //prereqs checker
+  //ReqsNode* c = (prereqsGraph->locations)[courseName];
+  //cout << c->courseName << endl;
+  //vector<ReqsNode*>::iterator it;
+  //it = (c->reqs).begin();
+  //cout << "Course checking is - " << courseName << endl;
+  //for (vector<ReqsNode*>::iterator it = prereqs.begin(); it < prereqs.end(); it++){
+  //  cout << *it << endl;
+    //cout << (*it)->courseName << endl;
+    /*
+    if (taken.count((*it)->courseName) == 0){
+      retData[0] = 1;
+    } */
+  //}
 
   return retData;
 }
@@ -156,6 +177,15 @@ void Student::calculateSchedule(string inputFile){
       if (temp[0] == 1) errorMessage += "Not all of the prereqs for " + data + " are completed.\n";
       if (temp[0] == 2) errorMessage += data + " is not offered at that time.\n";
     }
+  }
+
+  if (totalCredits < prereqsGraph->totalCredits) errorMessage += "Not enough total credits\n";
+  if (totalC < prereqsGraph->totalC) errorMessage += "Not enough C credits\n";
+  if (totalH < prereqsGraph->totalH) errorMessage += "Not enough H credits\n";
+  if (totalF < prereqsGraph->totalF) errorMessage += "Not enough F credits\n";
+
+  for (vector<string>::iterator it = (prereqsGraph->required).begin(); it < (prereqsGraph->required).end(); it++){
+    if (taken.count(*it) == 0) errorMessage += *it + " must be taken\n";
   }
 
   /* if everything meets requirements change errorMessage */

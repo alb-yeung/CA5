@@ -5,5 +5,4 @@ Course::Course(){
   credits = 0;
   offered = -1;
   tags = "";
-  graphLocation = 0;
 }
